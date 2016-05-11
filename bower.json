@@ -1,0 +1,17 @@
+{
+  "name": "zebraroom-console",
+  "description": "Control panel like approach to managing contacts, events.",
+  "main": "index.js",
+  "authors": [
+    "Armando Musto <armando.musto@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
