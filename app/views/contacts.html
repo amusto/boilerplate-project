@@ -1,0 +1,131 @@
+<style>
+
+    .st-sort-ascent:before{
+        content: '\25B2';
+    }
+
+    .st-sort-descent:before{
+        content: '\25BC';
+    }
+
+</style>
+
+
+<section id="content">
+    <section class="main padder padder-v">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <section class="panel" ng-show="displayEditContact">
+                    <div class="panel-body">
+                        <h4>Edit ({{editContactData.firstname}}<span ng-if="editContactData.lastname != ''"> {{editContactData.lastname}}</span>)</h4>
+                        <form class="form-horizontal" method="get" data-validate="parsley">
+                            <div class="row edit-contact-row">
+                                <div class="col-md-3">
+                                    <label class="col-md-3 control-label">First name</label>
+                                    <input type="text" name="firstname" placeholder="first name" class="bg-focus form-control parsley-validated col-md-3" data-required="true" data-type="text" value="{{editContactData.firstname}}">
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="col-md-3 control-label">Last name</label>
+                                    <input type="text" name="lastname" placeholder="Last name" class="bg-focus form-control parsley-validated" data-required="true" data-type="text" value="{{editContactData.lastname}}">
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="col-md-2 control-label">Phone</label>
+                                    <input type="text" name="tel" placeholder="phone" class="bg-focus form-control parsley-validated" data-required="true" data-type="text" value="{{editContactData.mobilephone}}">
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="col-md-2 control-label">Email</label>
+                                    <input type="text" name="email" placeholder="test@example.com" class="bg-focus form-control parsley-validated" data-required="true" data-type="email" value="{{editContactData.email}}">
+                                </div>
+                            </div>
+                            <div class="row edit-contact-row">
+                                <div class="col-md-5" style="padding-top:10px;">
+                                    <button type="submit" class="btn btn-white">Cancel</button>
+                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
+                <section class="panel">
+                    <header class="panel-heading">Contacts ({{contactList.length}}) <i class="fa fa-info-sign text-muted" data-toggle="popover" data-html="true" data-placement="top" data-content="The datatables use ajax to load the data. please put this file on a server to preview." title="" data-trigger="hover" data-original-title="Help"></i> </header>
+                    <table st-table="contactList" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th colspan="99">
+                                    <div class="panel-body">
+                                        <div class="row text-small">
+                                            <div class="col-sm-4 m-b-mini">
+                                                <select ng-model="itemsPerPage" ng-options="item for item in itemsPerPageOptions" ng-change="currentPage = 1">
+                                                </select>
+                                                <span style="margin-left:10px">Items per page</span>
+                                                <span>{{itemsPerPage}}</span>
+                                            </div>
+                                            <div class="col-sm-4 m-b-mini">
+
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="input-group">
+                                                    <input ng-model="searchText" placeholder="global search" class="input-sm form-control" type="search"/>
+                                                    <span class="input-group-btn">
+                                                      <button class="btn btn-sm btn-white" type="button">Go!</button>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th width="5px">edit</th>
+                                <th st-sort="fullname">Full name</th>
+                                <th st-sort="firstname">First name</th>
+                                <th st-sort="lastname">Last name</th>
+                                <th st-sort="mobilephone">Mobile phone</th>
+                                <th st-sort="email">Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="contact in contactList | offset: currentPage*itemsPerPage | filter:searchText | orderBy: fullname | limitTo:itemsPerPage">
+                                <td>
+                                    <a href="" ng-click="editContact(contact.id)"><i class="fa fa-pencil"></i></a>
+                                </td>
+                                <td>{{contact.fullname}}</td>
+                                <td>{{contact.firstname}}</td>
+                                <td>{{contact.lastname}}</td>
+                                <td>{{contact.mobilephone}}</td>
+                                <td>{{contact.email}}</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="5" class="text-center">
+                                    <uib-pagination boundary-links="true" total-items="totalItems" max-size="numPages" ng-model="currentPage" ng-change="pageChanged()" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></uib-pagination>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </section>
+            </div>
+        </div>
+    </section>
+</section>
+
+<script type="text/ng-template" id="myModalContent.html">
+    <div class="modal-header">
+        <h3 class="modal-title">I'm a modal!</h3>
+    </div>
+    <div class="modal-body">
+        <ul>
+            <li ng-repeat="item in items">
+                <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
+            </li>
+        </ul>
+        Selected: <b>{{ selected.item }}</b>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+        <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+    </div>
+</script>

@@ -1,20 +1,196 @@
-<!DOCTYPE html ng-app="myapp">
-<html lang="en">
-
-
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
 <head>
-    <meta charset="UTF-8">
-    <title></title>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>My AngularJS App</title>
+  <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/font.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/plugin.css">
+
+    <script src="bower_components/angular/angular.js"></script>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.js"></script>
+    <script src="bower_components/angular-smart-table/dist/smart-table.js"></script>
 
+    <script src="app.js"></script>
 
+    <!--[if lt IE 9]>
+    <script src="assets/js/ie/respond.min.js"></script>
+    <script src="assets/js/ie/html5.js"></script>
+    <script src="assets/js/ie/excanvas.js"></script>
+    <![endif]-->
 </head>
-
 <body>
+<!-- header -->
+<header id="header" class="navbar">
+    <ul class="nav navbar-nav navbar-avatar pull-right">
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <span class="hidden-xs-only">Armando Musto</span>
+                <span class="thumb-small avatar inline"><img src="assets/images/avatar.jpg" alt="Mika Sokeil" class="img-circle"></span>
+                <b class="caret hidden-xs-only"></b>
+            </a>
+            <ul class="dropdown-menu pull-right">
+                <li><a href="#">Settings</a></li>
+                <li><a href="#">Profile</a></li>
+                <li><a href="#"><span class="badge bg-danger pull-right">3</span>Notifications</a></li>
+                <li class="divider"></li>
+                <li><a href="docs.html">Help</a></li>
+                <li><a href="signin.html">Logout</a></li>
+            </ul>
+        </li>
+    </ul>
+    <a class="navbar-brand" href="#">first</a>
+    <button type="button" class="btn btn-link pull-left nav-toggle visible-xs" data-toggle="class:slide-nav slide-nav-left" data-target="body">
+        <i class="fa fa-bars fa-lg text-default"></i>
+    </button>
+    <ul class="nav navbar-nav hidden-xs">
+        <li>
+            <div class="m-t m-b-small" id="panel-notifications">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-comment-o fa-fw fa-lg text-default"></i><b class="badge badge-notes bg-danger count-n">2</b></a>
+                <section class="dropdown-menu m-l-small m-t-mini">
+                    <section class="panel panel-large arrow arrow-top">
+                        <header class="panel-heading bg-white"><span class="h5"><strong>You have <span class="count-n">2</span> notifications</strong></span></header>
+                        <div class="list-group">
+                            <a href="#" class="media list-group-item">
+                                <span class="pull-left thumb-small"><img src="assets/images/avatar.jpg" alt="John said" class="img-circle"></span>
+                  <span class="media-body block m-b-none">
+                    Moved to Bootstrap 3.0<br>
+                    <small class="text-muted">23 June 13</small>
+                  </span>
+                            </a>
+                            <a href="#" class="media list-group-item">
+                  <span class="media-body block m-b-none">
+                    first v.1 (Bootstrap 2.3 based) released<br>
+                    <small class="text-muted">19 June 13</small>
+                  </span>
+                            </a>
+                        </div>
+                        <footer class="panel-footer text-small">
+                            <a href="#" class="pull-right"><i class="fa fa-cog"></i></a>
+                            <a href="#">See all the notifications</a>
+                        </footer>
+                    </section>
+                </section>
+            </div>
+        </li>
+        <li><div class="m-t-small"><a class="btn btn-sm btn-info" data-toggle="modal" href="#modal"><i class="fa fa-fw fa-plus"></i> POST</a></div></li>
+        <li class="dropdown shift" data-toggle="shift:appendTo" data-target=".nav-primary .nav">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cog fa-lg visible-xs visible-xs-inline"></i>Settings <b class="caret hidden-sm-only"></b></a>
+            <ul class="dropdown-menu">
+                <li>
+                    <a href="#" data-toggle="class:navbar-fixed" data-target='body'>Navbar
+                        <span class="text-active">auto</span>
+                        <span class="text">fixed</span>
+                    </a>
+                </li>
+                <li class="hidden-xs">
+                    <a href="#" data-toggle="class:nav-vertical" data-target="#nav">Nav
+                        <span class="text-active">vertical</span>
+                        <span class="text">horizontal</span>
+                    </a>
+                </li>
+                <li class="divider hidden-xs"></li>
+                <li class="dropdown-header">Colors</li>
+                <li>
+                    <a href="#" data-toggle="class:bg bg-black" data-target='.navbar'>Navbar
+                        <span class="text-active">white</span>
+                        <span class="text">inverse</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-toggle="class:bg-light" data-target='#nav'>Nav
+                        <span class="text-active">inverse</span>
+                        <span class="text">light</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <form class="navbar-form pull-left shift" action="" data-toggle="shift:prependTo" data-target=".nav-primary">
+        <i class="fa fa-search text-muted"></i>
+        <input type="text" class="input-sm form-control" placeholder="Search">
+    </form>
+</header>
+<!-- / header -->
+<!-- nav -->
+<nav id="nav" class="nav-primary hidden-xs nav-vertical">
+    <ul class="nav" data-spy="affix" data-offset-top="50">
+        <li class="active"><a  ui-sref="home"><i class="fa fa-dashboard fa-lg"></i><span>Dashboard</span></a></li>
+        <!--li class="dropdown-submenu">
+          <a href="#"><i class="fa fa-th fa-lg"></i><span>Elements</span></a>
+            <ul class="dropdown-menu">
+                <li><a href="buttons.html">Buttons</a></li>
+                <li><a href="icons.html"><b class="badge pull-right">302</b>Icons</a></li>
+                <li><a href="grid.html">Grid</a></li>
+                <li><a href="widgets.html"><b class="badge bg-primary pull-right">8</b>Widgets</a></li>
+                <li><a href="components.html"><b class="badge pull-right">18</b>Components</a></li>
+                <li><a href="portlet.html">Portlet</a></li>
+            </ul>
+        </li-->
+        <li class="dropdown-submenu">
+            <a ui-sref="contacts"><i class="fa fa-list fa-lg"></i><span>Contacts</span></a>
+            <a ui-sref="addContact"><i class="fa fa-plus-circle fa-lg"></i><span>Add contact</span></a>
+            <!--ul class="dropdown-menu">
+                <li><a href="list.html">List groups</a></li>
+                <li><a href="table.html">Table</a></li>
+            </ul-->
+        </li>
+        <!--li><a href="form.html"><i class="fa fa-edit fa-lg"></i><span>Form</span></a></li>
+        <li><a href="chart.html"><i class="fa fa-signal fa-lg"></i><span>Chart</span></a></li>
+        <li class="dropdown-submenu">
+            <a href="#"><i class="fa fa-link fa-lg"></i><span>Others</span></a>
+            <ul class="dropdown-menu">
+                <li><a href="mail.html">Mail</a></li>
+                <li><a href="calendar.html">Fullcalendar</a></li>
+                <li><a href="timeline.html">Timeline</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="maps.html">Maps</a></li>
+                <li><a href="invoice.html">Invoice</a></li>
+                <li><a href="signin.html">Signin page</a></li>
+                <li><a href="signup.html">Signup page</a></li>
+                <li><a href="404.html">404 page</a></li>
+            </ul>
+        </li-->
+    </ul>
+</nav>
+<!-- / nav -->
 
+<div ui-view="mainView" id="content"></div>
 
+<!-- footer -->
+<footer id="footer">
+    <div class="text-center padder clearfix">
+        <p>
+            <small>&copy; first 2013, Mobile first web app framework base on Bootstrap</small><br><br>
+            <a href="#" class="btn btn-xs btn-circle btn-twitter"><i class="fa fa-twitter"></i></a>
+            <a href="#" class="btn btn-xs btn-circle btn-facebook"><i class="fa fa-facebook"></i></a>
+            <a href="#" class="btn btn-xs btn-circle btn-gplus"><i class="fa fa-google-plus"></i></a>
+        </p>
+    </div>
+</footer>
 
+  <a href="#" class="hide slide-nav-block" data-toggle="class:slide-nav slide-nav-left" data-target="body"></a>
+  <!-- / footer -->
+  <script src="assets/js/jquery.min.js"></script>
+
+  <script src="scripts/controllers/homeController.js"></script>
+  <script src="scripts/controllers/contactsController.js"></script>
+  <script src="scripts/controllers/addContactController.js"></script>
+  <script src="scripts/controllers/modalEditContactController.js"></script>
+  <!--script src="scripts/services/contactsEngine.js"></script-->
 </body>
-
 </html>
